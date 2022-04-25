@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -9,6 +10,7 @@ pipeline {
                 slackSend color: "#99ff66", message: "start build"
                 echo "hi"
             }
+        }
 
 
         stage('docker'){
@@ -17,7 +19,7 @@ pipeline {
                 slackSend color: "#66ff99", message: "start build docker"
                 echo "hi from docker"
             }
-
+        }
 
         stage('docker push'){
 
@@ -25,7 +27,7 @@ pipeline {
                 slackSend color: "#66ff99", message: "start build docker push"
                 echo "hi from docker push"
             }
-
+        }
         post { 
             succes { 
                 slackSend color: "good", message: "pipeline succesed"
