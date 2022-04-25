@@ -8,7 +8,7 @@ pipeline {
 
             steps{
                 slackSend color: "#99ff66", message: "start build"
-                echo "hi"
+               
             }
         }
 
@@ -17,7 +17,7 @@ pipeline {
 
             steps{
                 slackSend color: "#66ff99", message: "start build docker"
-                echo "hi from docker"
+                 sh "sudo docker build . -t shafey/jenkins-nginx"
             }
         }
 
@@ -25,7 +25,8 @@ pipeline {
 
             steps{
                 slackSend color: "#66ff99", message: "start build docker push"
-                echo "hi from docker push"
+                 sh "sudo docker login -u ${{ dockerhub.Username }} -p ${{ dockerhub.Password }} . -t shafey/jenkins-nginx"
+                 sh "sudo docker push shafey/jenkins-nginx"
             }
         }
         
