@@ -28,7 +28,10 @@ pipeline {
                 echo "hi from docker push"
             }
         }
-        post { 
+        
+
+    }
+    post { 
             success { 
                 slackSend color: "good", message: "pipeline succesed"
 
@@ -39,6 +42,6 @@ pipeline {
 
         }
 
-    }
-
 }
+
+
