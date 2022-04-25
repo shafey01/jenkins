@@ -23,9 +23,16 @@ pipeline {
 
         stage('docker push'){
 
+            environment {
+                
+                DOCKERHUB_USERNAME = credentials('dockerhub.Username')
+                DOCKERHUB_PASSWORD = credentials('dockerhub.Password')
+                
+           }
+
             steps{
                 slackSend color: "#66ff99", message: "start build docker push"
-                 sh "sudo docker login -u ${ dockerhub.Username } -p ${ dockerhub.Password } . -t shafey/jenkins-nginx"
+                 sh "sudo docker login -u ${ DOCKERHUB_USERNAME } -p ${ DOCKERHUB_PASSWORD } . -t shafey/jenkins-nginx"
                  sh "sudo docker push shafey/jenkins-nginx"
             }
         }
