@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('build'){
+
+            steps{
+                slackSend color: "#99ff66", message: "start build"
+                echo "hi"
+            }
+
+
+        stage('docker'){
+
+            steps{
+                slackSend color: "#66ff99", message: "start build docker"
+                echo "hi from docker"
+            }
+
+
+        stage('docker push'){
+
+            steps{
+                slackSend color: "#66ff99", message: "start build docker push"
+                echo "hi from docker push"
+            }
+
+        post { 
+            succes { 
+                slackSend color: "good", message: "pipeline succesed"
+
+            }
+
+            failure { 
+                slackSend color: "#ff3300", message: "pipeline faild"
+
+            }
+
+
+        }
+
+    }
+
+}
