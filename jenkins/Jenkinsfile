@@ -49,6 +49,7 @@ pipeline {
 
             steps{
                 slackSend color: "#66ff99", message: "start run docker on localhost"
+                 sh "sudo docker rm -f $(docker ps -qa)"
                  sh "sudo docker run -d -p 82:80 shafey/jenkins-nginx"
             }
         }
