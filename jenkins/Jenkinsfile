@@ -36,7 +36,22 @@ pipeline {
                  sh "sudo docker push shafey/jenkins-nginx"
             }
         }
+
+        stage('docker pull'){
+
+            steps{
+                slackSend color: "#66ff99", message: "start docker pull"
+                 sh "sudo docker pull shafey/jenkins-nginx"
+            }
+        }
         
+        stage('docker test on localhost'){
+
+            steps{
+                slackSend color: "#66ff99", message: "start run docker on localhost"
+                 sh "sudo docker run -d -p 82:80 shafey/jenkins-nginx"
+            }
+        }
 
     }
     post { 
